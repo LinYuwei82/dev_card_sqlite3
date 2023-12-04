@@ -209,10 +209,10 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                                                    options=options)
         if file_name:
             # data.to_excel(file_name, index=False)
-            QMessageBox.information(None, '提示', '已成功打印到PDF文件！', QMessageBox.Ok)
             result = self.show_all()
             card = printer.CardReceive(result)
             card.card_data_receive(file_name)
+            QMessageBox.information(None, '提示', '已成功打印到PDF文件！', QMessageBox.Ok)
 
     def print_right(self):
         options = QFileDialog.Options()
@@ -220,10 +220,10 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                                                    options=options)
         if file_name:
             # data.to_excel(file_name, index=False)
-            QMessageBox.information(None, '提示', '已成功打印到PDF文件！', QMessageBox.Ok)
             result = self.query()
             card = printer.CardReceive(result)
             card.card_data_receive(file_name)
+            QMessageBox.information(None, '提示', '已成功打印到PDF文件！', QMessageBox.Ok)
 
     def add(self):
         dev_name = self.edit_name.text()

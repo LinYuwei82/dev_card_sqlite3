@@ -25,9 +25,9 @@ def exec_db(sql, *values):
 
 
 def init_data():
-    sql1 = 'create table if not exists tb_device (dev_id INTEGER primary key AUTOINCREMENT, dev_name TEXT, ' \
-           'location TEXT, control_range TEXT, phone TEXT)'
-    sql2 = 'create table if not exists tb_user (userName TEXT primary key , userPwd TEXT)'
+    sql1 = 'create table if not exists tb_device (dev_id INTEGER primary key AUTOINCREMENT, dev_name VARCHAR(10), ' \
+           'location VARCHAR(10), control_range VARCHAR(10), phone VARCHAR(10))'
+    sql2 = 'create table if not exists tb_user (userName VARCHAR(10) primary key , userPwd VARCHAR(10))'
 
     sql3 = 'insert into tb_user (userName, userPwd) values ("root","123456")'
     sql4 = 'insert into tb_user (userName, userPwd) values ("安业物业","123456")'
