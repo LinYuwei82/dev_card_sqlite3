@@ -20,7 +20,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.setupUi(self)
         self.setWindowFlags(QtCore.Qt.MSWindowsFixedSizeDialogHint)
         self.setWindowIcon(QIcon(os.path.join(BASE_DIR, 'ico/app.png')))
-        self.setWindowTitle("设备管理卡制作系统 Ver 0.01")
+        self.setWindowTitle("设备管理卡制作系统 Ver 1.01")
         self.tb_device.setAlternatingRowColors(True)  # 使表格颜色交错显示
         self.tb_device.verticalHeader().setVisible(False)  # 隐藏垂直标题
         # self.tb_device.resizeColumnsToContents()

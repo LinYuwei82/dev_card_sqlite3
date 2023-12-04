@@ -363,8 +363,8 @@ class Ui_mainWindow(object):
 
     def retranslateUi(self, mainWindow):
         _translate = QtCore.QCoreApplication.translate
-        mainWindow.setWindowTitle(_translate("mainWindow", "设备管理卡制作系统 Ver 0.01"))
-        self.label_6.setText(_translate("mainWindow", "设备管理卡制作系统 Ver 0.01"))
+        mainWindow.setWindowTitle(_translate("mainWindow", "设备管理卡制作系统 Ver 1.01"))
+        self.label_6.setText(_translate("mainWindow", "设备管理卡制作系统 Ver 1.01"))
         self.btn_show_all.setText(_translate("mainWindow", "刷新"))
         self.label_7.setText(_translate("mainWindow", "名称列表"))
         self.label_5.setText(_translate("mainWindow", "位置列表"))
