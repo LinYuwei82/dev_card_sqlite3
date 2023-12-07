@@ -190,7 +190,7 @@ class CardReceive:
                                                     data_list[k][3])
                         k += 1
                         # print(k)
-                        if k % 12 == 0:  # 满12组换下一页
+                        if k % 12 == 0 and k < row:  # 没有打完,并且每满12组换下一页
                             c1.showPage()
                             c1.translate(0 * mm, y * 3 * mm)  # 移动页面原点到新页面左上角
             # print(k)
