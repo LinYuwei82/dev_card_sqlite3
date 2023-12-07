@@ -123,10 +123,13 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                                                    options=options)
         if file_name:
             data = pd.read_excel(file_name)
-            truncated_fields = ['dev_name', 'location', 'control_range']  # 由于导入的phone可能是数值类型，而数值类型不支持切片操作
-            max_length = [10, 10, 10]
+            truncated_fields = ['dev_name', 'location', 'control_range', 'phone']  # 由于导入的phone可能是数值类型，而数值类型不支持切片操作
+            max_length = [10, 10, 10, 11]
             for field, max_length in zip(truncated_fields, max_length):
-                data[field] = data[field].apply(lambda x: x[:max_length] if len(x) > max_length else x)
+                if field == 'phone':  # 对phone字段进行特殊处理，先转换为字符串类型再进行截断
+                    data[field] = data[field].apply(lambda x: str(x)[:max_length] if len(str(x)) > max_length else x)
+                else:
+                    data[field] = data[field].apply(lambda x: x[:max_length] if len(x) > max_length else x)
             for i in data.itertuples():
                 values = tuple(i[2:])
                 sql = 'insert into tb_device (dev_name,location,control_range,phone) values (?,?,?,?)'
@@ -138,6 +141,11 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         sql = 'select * from tb_device'
         result1, result2 = service.query_desc(sql)  # result1（所有行的列表）和result2（查询结果的描述）
         data = pd.DataFrame(result1, columns=[desc[0] for desc in result2])
+        # 过滤掉phone字段中的非数字字符
+        data['phone'] = data['phone'].apply(lambda x: ''.join(filter(str.isdigit, str(x))))
+        # 将phone字段转换为数值类型
+        data['phone'] = pd.to_numeric(data['phone'], errors='coerce')  # 设置为coerce可以将无法转换为数值的值设置为NaN
+
         options = QFileDialog.Options()
         file_name, _ = QFileDialog.getSaveFileName(self, '导出Excel文件', 'tb_device.xlsx', 'Excel文件 (*.xlsx)',
                                                    options=options)
