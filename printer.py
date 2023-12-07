@@ -13,8 +13,8 @@ y = 65 + 6.5
 opposansB = "OPPOSansB"
 opposansR = "OPPOSansR"
 
-pdfmetrics.registerFont(TTFont(opposansB, (os.path.join(BASE_DIR, "fonts/OPPOSans-B.ttf"))))
-pdfmetrics.registerFont(TTFont(opposansR, (os.path.join(BASE_DIR, "fonts/OPPOSans-R.ttf"))))
+pdfmetrics.registerFont(TTFont(opposansB, (os.path.join(BASE_DIR, "resources/fonts/OPPOSans-B.ttf"))))
+pdfmetrics.registerFont(TTFont(opposansR, (os.path.join(BASE_DIR, "resources/fonts/OPPOSans-R.ttf"))))
 
 
 class CardModel:
@@ -45,7 +45,7 @@ class CardModel:
                     (15.0 + self.card_y) * mm)
 
         # 画logo
-        self.c.drawImage((os.path.join(BASE_DIR, "ico/anyelogo.jpg")), (10 + self.card_x) * mm,
+        self.c.drawImage((os.path.join(BASE_DIR, "resources/icons/logo.jpg")), (10 + self.card_x) * mm,
                          (58.5 + self.card_y) * mm, width=25, height=25)
 
         # 公司名
@@ -119,7 +119,7 @@ class CardData:
         self.c.saveState()  # 保存状态
 
         textobject1 = self.c.beginText()
-        textobject1.setTextOrigin((30 + self.card_x) * mm, (38.5 + self.card_y) * mm)
+        textobject1.setTextOrigin((28.5 + self.card_x) * mm, (38.5 + self.card_y) * mm)
         textobject1.setFont(opposansB, 11)
         textobject1.setHorizScale(90)
         textobject1.setCharSpace(0.9)
@@ -128,7 +128,7 @@ class CardData:
         self.c.drawText(textobject1)
 
         textobject2 = self.c.beginText()
-        textobject2.setTextOrigin((30 + self.card_x) * mm, (31 + self.card_y) * mm)
+        textobject2.setTextOrigin((28.5 + self.card_x) * mm, (31 + self.card_y) * mm)
         textobject2.setFont(opposansB, 11)
         textobject2.setHorizScale(90)
         textobject2.setCharSpace(0.9)
@@ -137,7 +137,7 @@ class CardData:
         self.c.drawText(textobject2)
 
         textobject3 = self.c.beginText()
-        textobject3.setTextOrigin((30 + self.card_x) * mm, (23.5 + self.card_y) * mm)
+        textobject3.setTextOrigin((28.5 + self.card_x) * mm, (23.5 + self.card_y) * mm)
         textobject3.setFont(opposansB, 11)
         textobject3.setHorizScale(90)
         textobject3.setCharSpace(0.9)
@@ -146,12 +146,14 @@ class CardData:
         self.c.drawText(textobject3)
 
         textobject4 = self.c.beginText()
-        textobject4.setTextOrigin((30 + self.card_x) * mm, (16 + self.card_y) * mm)
+        textobject4.setTextOrigin((28.5 + self.card_x) * mm, (16 + self.card_y) * mm)
         textobject4.setFont(opposansB, 11)
         textobject4.setHorizScale(90)
         textobject4.setCharSpace(0.9)
         textobject4.setFillColorCMYK(0, 0, 0, 1)
-        textobject4.textLine(phone)
+        # 格式化电话号码，先显示前3个，再分别显示后4个
+        new_phone = phone[:3] + " " + phone[3:7] + " " + phone[7:]
+        textobject4.textLine(new_phone)
         self.c.drawText(textobject4)
 
         self.c.restoreState()  # 恢复状态

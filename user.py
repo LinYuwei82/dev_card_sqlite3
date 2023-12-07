@@ -1,3 +1,4 @@
+import os
 import sys
 
 from PyQt5 import QtWidgets, QtCore
@@ -7,13 +8,15 @@ from PyQt5.QtWidgets import QApplication, QTableWidgetItem, QMessageBox
 import service
 from user_ui import Ui_MainWindow
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 class UserWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.setWindowFlags(QtCore.Qt.MSWindowsFixedSizeDialogHint)
-        self.setWindowIcon(QIcon('app.png'))
+        self.setWindowIcon(QIcon(os.path.join(BASE_DIR, 'resources/icons/app.png')))
         self.setStatusBar(None)
         self.tableWidget_user.setAlternatingRowColors(True)  # 使表格颜色交错显示
         self.tableWidget_user.verticalHeader().setVisible(False)  # 隐藏垂直标题
@@ -59,7 +62,7 @@ class UserWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 userPwd = self.lineEdit_pwd.text()
                 if userPwd != '':
                     result = service.exec_db('update tb_user set userPwd=? '
-                                             'where userName=?', userPwd, self.select,)
+                                             'where userName=?', userPwd, self.select, )
                     if result > 0:
                         self.query_db()
                         QMessageBox.information(None, '捍示', '信息修改成功！', QMessageBox.Ok)

@@ -19,8 +19,8 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         super().__init__()
         self.setupUi(self)
         self.setWindowFlags(QtCore.Qt.MSWindowsFixedSizeDialogHint)
-        self.setWindowIcon(QIcon(os.path.join(BASE_DIR, 'ico/app.png')))
-        self.setWindowTitle("设备管理卡制作系统 Ver 1.01")
+        self.setWindowIcon(QIcon(os.path.join(BASE_DIR, 'resources/icons/app.png')))
+        self.setWindowTitle("设备管理卡制作系统" + service.Ver)
         self.tb_device.setAlternatingRowColors(True)  # 使表格颜色交错显示
         self.tb_device.verticalHeader().setVisible(False)  # 隐藏垂直标题
         # self.tb_device.resizeColumnsToContents()
@@ -123,6 +123,10 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                                                    options=options)
         if file_name:
             data = pd.read_excel(file_name)
+            truncated_fields = ['dev_name', 'location', 'control_range']  # 由于导入的phone可能是数值类型，而数值类型不支持切片操作
+            max_length = [10, 10, 10]
+            for field, max_length in zip(truncated_fields, max_length):
+                data[field] = data[field].apply(lambda x: x[:max_length] if len(x) > max_length else x)
             for i in data.itertuples():
                 values = tuple(i[2:])
                 sql = 'insert into tb_device (dev_name,location,control_range,phone) values (?,?,?,?)'

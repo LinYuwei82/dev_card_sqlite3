@@ -25,14 +25,14 @@ def exec_db(sql, *values):
 
 
 def init_data():
-    sql1 = 'create table if not exists tb_device (dev_id INTEGER primary key AUTOINCREMENT, dev_name VARCHAR(10), ' \
-           'location VARCHAR(10), control_range VARCHAR(10), phone VARCHAR(10))'
-    sql2 = 'create table if not exists tb_user (userName VARCHAR(10) primary key , userPwd VARCHAR(10))'
+    sql1 = 'create table if not exists tb_device (dev_id INTEGER primary key AUTOINCREMENT, dev_name VARCHAR(20), ' \
+           'location VARCHAR(20), control_range VARCHAR(20), phone VARCHAR(20))'
+    sql2 = 'create table if not exists tb_user (userName VARCHAR(20) primary key , userPwd VARCHAR(20))'
 
     sql3 = 'insert into tb_user (userName, userPwd) values ("root","123456")'
     sql4 = 'insert into tb_user (userName, userPwd) values ("安业物业","123456")'
     sql5 = 'insert into tb_device (dev_id, dev_name, location, control_range, phone) values (1, "配电箱","艺术楼2楼",' \
-           '"艺术楼2楼各教室","138 0013 8000")'
+           '"艺术楼2楼各教室","13800138000")'
     try:
         exec_db(sql1)
         exec_db(sql2)

@@ -21,7 +21,7 @@ class LoginWindow(QtWidgets.QWidget, Ui_Form):
         initialize_sqlite3.init_data()  # 初始化 （建立数据库和表，并录入用户名、密码和信息。）
         self.setupUi(self)
         self.setWindowFlags(QtCore.Qt.MSWindowsFixedSizeDialogHint)
-        self.setWindowIcon(QIcon(os.path.join(BASE_DIR, 'ico/app.png')))
+        self.setWindowIcon(QIcon(os.path.join(BASE_DIR, 'resources/icons/app.png')))
         self.lineEdit_pwd.setEchoMode(QtWidgets.QLineEdit.Password)
         self.pushButton_exit.clicked.connect(QApplication.quit)
         self.lineEdit_pwd.returnPressed.connect(self.open_main)  # 按回车登录

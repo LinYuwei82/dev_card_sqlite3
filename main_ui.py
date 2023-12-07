@@ -10,6 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+import service
+
 
 class Ui_mainWindow(object):
     def setupUi(self, mainWindow):
@@ -117,6 +119,7 @@ class Ui_mainWindow(object):
         self.cmbox_kind.setObjectName("cmbox_kind")
         self.horizontalLayout.addWidget(self.cmbox_kind)
         self.edit_query = QtWidgets.QLineEdit(self.layoutWidget)
+        self.edit_query.setMaxLength(15)
         self.edit_query.setMinimumSize(QtCore.QSize(80, 30))
         self.edit_query.setMaximumSize(QtCore.QSize(120, 16777215))
         font = QtGui.QFont()
@@ -166,6 +169,7 @@ class Ui_mainWindow(object):
         self.label.setObjectName("label")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label)
         self.edit_name = QtWidgets.QLineEdit(self.layoutWidget1)
+        self.edit_name.setMaxLength(10)
         self.edit_name.setMinimumSize(QtCore.QSize(0, 30))
         font = QtGui.QFont()
         font.setFamily("宋体")
@@ -182,6 +186,7 @@ class Ui_mainWindow(object):
         self.label_2.setObjectName("label_2")
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_2)
         self.edit_location = QtWidgets.QLineEdit(self.layoutWidget1)
+        self.edit_location.setMaxLength(10)
         self.edit_location.setMinimumSize(QtCore.QSize(0, 30))
         font = QtGui.QFont()
         font.setFamily("宋体")
@@ -198,6 +203,7 @@ class Ui_mainWindow(object):
         self.label_4.setObjectName("label_4")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.label_4)
         self.edit_range = QtWidgets.QLineEdit(self.layoutWidget1)
+        self.edit_range.setMaxLength(10)
         self.edit_range.setMinimumSize(QtCore.QSize(0, 30))
         font = QtGui.QFont()
         font.setFamily("宋体")
@@ -214,6 +220,7 @@ class Ui_mainWindow(object):
         self.label_3.setObjectName("label_3")
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.label_3)
         self.edit_phone = QtWidgets.QLineEdit(self.layoutWidget1)
+        self.edit_phone.setMaxLength(11)
         self.edit_phone.setMinimumSize(QtCore.QSize(0, 30))
         font = QtGui.QFont()
         font.setFamily("宋体")
@@ -363,8 +370,8 @@ class Ui_mainWindow(object):
 
     def retranslateUi(self, mainWindow):
         _translate = QtCore.QCoreApplication.translate
-        mainWindow.setWindowTitle(_translate("mainWindow", "设备管理卡制作系统 Ver 1.01"))
-        self.label_6.setText(_translate("mainWindow", "设备管理卡制作系统 Ver 1.01"))
+        mainWindow.setWindowTitle(_translate("mainWindow", "设备管理卡制作系统" + service.Ver))
+        self.label_6.setText(_translate("mainWindow", "设备管理卡制作系统" + service.Ver))
         self.btn_show_all.setText(_translate("mainWindow", "刷新"))
         self.label_7.setText(_translate("mainWindow", "名称列表"))
         self.label_5.setText(_translate("mainWindow", "位置列表"))
