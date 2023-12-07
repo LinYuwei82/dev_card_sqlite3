@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import QApplication, QMessageBox
 import initialize_sqlite3
 import main
 import service
-from login_ui import Ui_Form
+from UI.login_ui import Ui_Form
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 

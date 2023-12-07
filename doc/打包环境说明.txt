@@ -1,0 +1,23 @@
+开发、打包环境：
+
+Releases：dev_cardV1.01_win10_64.zip  /  设备管理卡制作系统V1.01_win10_64.zip
+操作系统：64位 windows 10/11
+python：python 3.11
+PyCharm：PyCharm 2023.2.5
+UI：PyQt5
+数据库：sqlite3
+第三方库：
+打包工具：pyinstaller
+
+
+Releases：dev_cardV1.01_win7_64.zip  /  设备管理卡制作系统V1.01_win7_64.zip
+
+
+
+
+
+Releases：dev_cardV1.01_mac_Arm64.zip  /  设备管理卡制作系统V1.01_mac_Arm64.zip
+
+
+
+

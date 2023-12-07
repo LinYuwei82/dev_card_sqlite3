@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QMessag
 import printer
 import service
 import user
-from main_ui import Ui_mainWindow
+from UI.main_ui import Ui_mainWindow
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 

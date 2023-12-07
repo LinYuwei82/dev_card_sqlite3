@@ -6,7 +6,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QTableWidgetItem, QMessageBox
 
 import service
-from user_ui import Ui_MainWindow
+from UI.user_ui import Ui_MainWindow
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
