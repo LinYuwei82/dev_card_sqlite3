@@ -25,10 +25,11 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.tb_device.verticalHeader().setVisible(False)  # 隐藏垂直标题
         # self.tb_device.resizeColumnsToContents()
         datetime = QtCore.QDateTime.currentDateTime()  # 获取当前日期时间
-        time = datetime.toString("yyyy-MM-dd HH:mm:ss")  # 对日期时间进行格式化
+        self.time = datetime.toString("yyyy-MM-dd HH:mm:ss")  # 对日期时间进行格式化
         # 在状态栏中显示登录用户/登录时间，以及版权信息
-        self.statusbar.showMessage("当前登录用户：" + service.userName + " | 登录时间：" + time
-                                   + " | 版权所有：深圳市安业物业管理有限公司", 0)
+        self.statusbar.showMessage("当前登录用户：" + service.userName + " | 登录时间：" + self.time
+                                   + " | 版权所有：" + service.copyrights +
+                                   "                    " + "共计  " + service.record + "  条记录", 0)
         self.bind_name()
         self.bind_location()
         self.bind_kind()
@@ -172,6 +173,10 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                                           'where dev_name=? and location=?', name, location)
         # return result  # 2023年11月29日，为了返回打印值新增测试用
         row = len(result)
+        service.record = str(row)
+        self.statusbar.showMessage("当前登录用户：" + service.userName + " | 登录时间：" + self.time
+                                   + " | 版权所有：" + service.copyrights +
+                                   "                    " + "共计  " + service.record + "  条记录", 0)
         self.tb_device.setRowCount(row)
         self.tb_device.setColumnCount(5)
         self.tb_device.setHorizontalHeaderLabels(['设备编号', '设备名称', '位  置', '控制范围', '维护电话'])
@@ -206,6 +211,10 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                       '"%' + key + '%"'
                 result = service.query_db2(sql)
         row = len(result)
+        service.record = str(row)
+        self.statusbar.showMessage("当前登录用户：" + service.userName + " | 登录时间：" + self.time
+                                   + " | 版权所有：" + service.copyrights +
+                                   "                    " + "共计  " + service.record + "  条记录", 0)
         self.tb_device.setRowCount(row)
         self.tb_device.setColumnCount(5)
         self.tb_device.setHorizontalHeaderLabels(['设备编号', '设备名称', '位  置', '控制范围', '维护电话'])

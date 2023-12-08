@@ -8,7 +8,9 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 userName = ''
 Ver = ' V1.0.2'
-
+copyrights = '深圳市安业物业管理有限公司'
+record = ""
+# print(copyrights)
 
 # def open_db():
 #     db = sqlite3.connect("devicedb.db")
