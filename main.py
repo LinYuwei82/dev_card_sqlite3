@@ -28,8 +28,9 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         self.time = datetime.toString("yyyy-MM-dd HH:mm:ss")  # 对日期时间进行格式化
         # 在状态栏中显示登录用户/登录时间，以及版权信息/记录数
         self.refresh_status_bar()
-        self.bind_name()
-        self.bind_location()
+        # self.bind_name()
+        # self.bind_location()
+        self.refresh_cmbox()
         self.bind_kind()
         self.show_all()
         self.tb_device.itemClicked.connect(self.get_item)
@@ -54,6 +55,16 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                                    + "  |  版权所有：" + service.copyrights +
                                    "                    " + "共计  " + service.record + "  条记录", 0)
 
+    def refresh_cmbox(self):
+        self.cmbox_name.clear()
+        self.cmbox_location.clear()
+        self.cmbox_name.addItem("所有")
+        self.cmbox_location.addItem("所有")
+        self.existing_name = []
+        self.bind_name()
+        self.bind_location()
+
+
     def open_user(self):
         self.m = user.UserWindow()  # 建用户窗口实例
         self.m.show()
@@ -71,28 +82,29 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         if res == QMessageBox.Yes:
             result = service.exec_del('delete from tb_device')
             if result > 0:
+                self.refresh_cmbox()
                 self.show_all()
                 QMessageBox.information(None, '提示', '全部数据已清空！', QMessageBox.Ok)
 
     def bind_name(self):
-        self.cmbox_name.addItem('所有')
+        # self.cmbox_name.addItem('所有')
         result = service.query_db('select dev_name from tb_device')
-        existing_name = []
+        # existing_name = []
         for i in result:
             key = i[0]
-            if key not in existing_name:
+            if key not in self.existing_name:
                 self.cmbox_name.addItem(i[0])
-                existing_name.append(key)
+                self.existing_name.append(key)
 
     def bind_location(self):
-        self.cmbox_location.addItem('所有')
+        # self.cmbox_location.addItem('所有')
         result = service.query_db('select location from tb_device')
-        existing_name = []
+        # existing_name = []
         for i in result:
             key = i[0]
-            if key not in existing_name:
+            if key not in self.existing_name:
                 self.cmbox_location.addItem(i[0])
-                existing_name.append(key)
+                self.existing_name.append(key)
 
     def bind_kind(self):
         self.cmbox_kind.addItem('设备名称')
@@ -189,9 +201,9 @@ class MainWindow(QMainWindow, Ui_mainWindow):
         for i in range(row):
             for j in range(self.tb_device.columnCount()):
                 data = QTableWidgetItem(str(result[i][j]))
-                # data.setCheckState(False)
                 self.tb_device.setItem(i, j, data)
-                # self.tb_device.resizeColumnsToContents()
+        self.bind_name()
+        self.bind_location()
         return result  # 2023年11月29日，为了返回打印值新增测试用
 
     def query(self):  # 模糊查询，对应【查询】按钮
@@ -287,6 +299,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                 sql = 'update tb_device set dev_name=?, location=?, control_range=?, phone=? where dev_id=?'
                 result = service.exec_db(sql, dev_name, location, control_range, phone, dev_id)
                 if result > 0:
+                    self.refresh_cmbox()
                     self.show_all()
                     QMessageBox.information(None, '提示', '信息修改成功！', QMessageBox.Ok)
                     self.reset()
@@ -304,10 +317,12 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                 if res == QMessageBox.Yes:
                     result = service.exec_db('delete from tb_device where dev_id=?', self.select, )
                     if result > 0:
+                        self.refresh_cmbox()
                         self.show_all()
                         self.reset()
                         QMessageBox.information(None, '提示', '信息删除成功！', QMessageBox.Ok)
                         self.select = ''
+
             else:
                 QMessageBox.warning(None, '警告', '请先选择要删除的数据！', QMessageBox.Ok)
         except:
