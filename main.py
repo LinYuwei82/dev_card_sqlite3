@@ -84,7 +84,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
             if result > 0:
                 self.refresh_cmbox()
                 self.show_all()
-                self.select = ''
+                self.reset()
                 QMessageBox.information(None, '提示', '全部数据已清空！', QMessageBox.Ok)
 
     def bind_name(self):
@@ -304,7 +304,6 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                     self.show_all()
                     QMessageBox.information(None, '提示', '信息修改成功！', QMessageBox.Ok)
                     self.reset()
-                    self.select = ''
             else:
                 QMessageBox.warning(None, '警告', '请先选择要修改的数据！', QMessageBox.Ok)
 
@@ -322,7 +321,6 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                         self.show_all()
                         self.reset()
                         QMessageBox.information(None, '提示', '信息删除成功！', QMessageBox.Ok)
-                        self.select = ''
 
             else:
                 QMessageBox.warning(None, '警告', '请先选择要删除的数据！', QMessageBox.Ok)
