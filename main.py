@@ -84,6 +84,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
             if result > 0:
                 self.refresh_cmbox()
                 self.show_all()
+                self.select = ''
                 QMessageBox.information(None, '提示', '全部数据已清空！', QMessageBox.Ok)
 
     def bind_name(self):
