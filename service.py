@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # (os.path.join(BASE_DIR, ""))
 
 userName = ''
-Ver = ' V1.1.0'
+Ver = ' V1.1.2'
 copyrights = '深圳市安业物业管理有限公司'
 record = ""
 # print(copyrights)
