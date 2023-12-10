@@ -205,6 +205,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                 self.tb_device.setItem(i, j, data)
         self.bind_name()
         self.bind_location()
+        self.reset()
         return result  # 2023年11月29日，为了返回打印值新增测试用
 
     def query(self):  # 模糊查询，对应【查询】按钮
@@ -239,6 +240,7 @@ class MainWindow(QMainWindow, Ui_mainWindow):
             for j in range(self.tb_device.columnCount()):
                 data = QTableWidgetItem(str(result[i][j]))
                 self.tb_device.setItem(i, j, data)
+        self.reset()
         return result  # 2023年11月29日，为了返回打印值新增测试用
 
     def print_left(self):
@@ -285,7 +287,6 @@ class MainWindow(QMainWindow, Ui_mainWindow):
                     self.show_all()
                     QMessageBox.information(None, '提示', '信息添加成功！', QMessageBox.Ok)
                     self.reset()
-                    self.select = ''
         else:
             QMessageBox.warning(None, '警告', '请输入数据后，再执行相关操作！', QMessageBox.Ok)
 
